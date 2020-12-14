@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Account Statement for - {{ account.account_name}}</h2>
+{% for statement in statements %}
+    
+        Date : {{ statement.transaction_date }}
+        <br>
+        Transaction : {{ statement.transaction }}
+        <br>
+        Amount : {{ statement.transaction_amount }}
+        <br>
+
+    {% if statement.transaction_completed == False %}
+           Is complete : {{ statement.transaction_completed }}
+            <br>
+            <form action="{{ url_for('complete', id=account.id, st_id=statement.id) }}">
+                <input type=submit value="Complete">
+            </form>
+            <a href="{{ url_for('add', id = account.id) }}">Add A new Transaction </a>
+            <br><br><br>
+    {% endif %}
+
+    {% if statement.transaction_completed == True %}
+           Is complete : {{ statement.transaction_completed }}
+            <br>
+            <form action="{{ url_for('incomplete', id=account.id, st_id=statement.id) }}">
+                <input type=submit value="Incomplete">
+            </form>
+            <a href="{{ url_for('add', id = account.id) }}">Add A new Transaction </a>
+            <br><br><br>
+    {% endif %}
+    
+{% endfor %}
+
+
+{% endblock body %}

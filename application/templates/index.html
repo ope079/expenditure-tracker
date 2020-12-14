@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+
+        <br>
+        <a href="{{ url_for('customer_home') }}">View Customer Home Page</a>
+        <br>
+
+<h2>Accounts</h2>
+{% for account in all_accounts %}
+        Account Name : {{ account.account_name }}
+        <br>
+        Account Balance : {{ account.balance }}
+        <br><br>
+{% endfor %}
+
+{% endblock body %}

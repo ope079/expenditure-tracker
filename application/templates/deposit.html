@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<br><br>
+Current Balance : {{ account.balance }}
+<br><br>
+Amount to Deposit :
+<form action='' method='POST'>
+    {{form.hidden_tag()}}
+    {{ form.transaction.label }} {{ form.transaction}} <br><br>
+    {{ form.transaction_amount.label }} {{ form.transaction_amount }}<br><br>
+    {{form.submit}}
+</form>
+
+
+{% endblock body %}

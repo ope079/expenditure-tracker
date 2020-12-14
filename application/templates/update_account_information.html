@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+<br><br>
+Original Account Name : {{ account.account_name }}
+<br><br>
+Original Customer Name : {{ account.cust_name }}
+<br><br>
+Original Balance : {{ account.balance }}
+
+<form action='' method='POST'>
+    {{form.hidden_tag()}}
+    {{ form.account.label }} {{ form.account}} <br><br>
+    {{ form.customer.label }} {{ form.customer }}<br><br>
+    {{form.submit}}
+</form>
+
+
+{% endblock body %}

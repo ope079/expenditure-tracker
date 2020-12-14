@@ -47,28 +47,16 @@ def incomplete(id, st_id):
     return redirect(url_for("statements", id=id, st_id=st_id))
 
 
-@app.route('/add_payee_information/<int:id>', methods=['GET','POST'])   
-def add(id):
-    account = Accounts.query.filter_by(id=id).first()
-    form = TransactionForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            new_transaction = Transaction(transaction=form.transaction.data,transaction_amount=form.transaction_amount.data, accounts=account)
-            db.session.add(new_transaction)
-            db.session.commit()
-            return redirect(url_for("home"))
-    return render_template("add_payee_information.html", title="Add a transaction", form=form)
-
-@app.route('/update_payee_information/<int:id>',  methods=['GET','POST'])
+@app.route('/update_account_information/<int:id>',  methods=['GET','POST'])
 def update(id):
-    form = TransactionForm()
-    transaction = Transaction.query.filter_by(id=id).first()
+    form = HomeForm()
+    account = Accounts.query.filter_by(id=id).first()
     if request.method =="POST":
-        transaction.transaction = form.transaction.data
-        transaction.amount = form.transaction_amount.data
+        account.account_name = form.account.data
+        account.cust_name = form.customer.data
         db.session.commit()
         return redirect(url_for("customer_home"))
-    return render_template("update_payee_information.html", form=form, title="Update Transaction", transaction=transaction)
+    return render_template("update_account_information.html", form=form, title="Update Account Information", account=account)
 
 @app.route('/deposit/<int:account_id>',  methods=['GET','POST'])
 def deposit(account_id):
@@ -98,12 +86,25 @@ def withdraw(account_id):
             return redirect(url_for("customer_home"))
     return render_template("withdraw.html", form=form, title="Add Withdrawal" , account=account)
 
-@app.route('/delete/<int:id>')
-def delete(id):
+
+@app.route('/deleteTransaction/<int:id>/<int:account_id>')
+def deleteTransaction(id, account_id):
     transaction = Transaction.query.filter_by(id=id).first()
+    account = Accounts.query.filter_by(id=account_id).first()
+    if transaction.transaction.startswith('Deposit'):
+        account.balance = account.balance - transaction.transaction_amount
+    elif transaction.transaction.startswith('Withdrawal'):
+        account.balance = account.balance + transaction.transaction_amount
     db.session.delete(transaction)
     db.session.commit()
-    return redirect(url_for("home"))
+    return redirect(url_for("statements", id=account.id))
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    account = Accounts.query.filter_by(id=id).first()
+    db.session.delete(account)
+    db.session.commit()
+    return redirect(url_for("customer_home"))
 
 @app.route('/statements/<int:id>', methods=['GET'])
 def statements(id):
@@ -111,4 +112,20 @@ def statements(id):
     statements = account.transactions.all()
     return render_template("statements.html", title="Statements", statements=statements, account=account)
 
+@app.route('/statements/<int:id>', methods=['GET'])
+def sortStatements(id):
+    account = Accounts.query.filter_by(id=id).first()
+    statements = account.transactions.all().order_by(statements.transaction_date)
+    return redirect(url_for("statements.html", title="Statements", statements=statements, account=account))
 
+@app.route('/statements/<int:id>', methods=['GET'])
+def sortStatementsDesc(id):
+    account = Accounts.query.filter_by(id=id).first()
+    statements = account.transactions.order_by(statements.transaction_date.desc())
+    return redirect(url_for("statements.html", title="Statements", statements=statements, account=account))
+
+@app.route('/statements/<int:id>', methods=['GET'])
+def sortStatementsAmount(id):
+    account = Accounts.query.filter_by(id=id).first()
+    statements = account.transactions.order_by(statements.transaction_amount)
+    return redirect(url_for("statements.html", title="Statements", statements=statements, account=account))

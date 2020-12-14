@@ -10,6 +10,8 @@
         Account Name : {{ account.account_name }}
         <br>
         Account Balance : {{ account.balance }}
+        <br>
+        <a href="{{ url_for('statements', id=account.id) }}">View Statements</a>
         <br><br>
 {% endfor %}
 

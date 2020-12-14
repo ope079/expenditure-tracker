@@ -2,36 +2,60 @@
 {% block body %}
 
 <h2>Account Statement for - {{ account.account_name}}</h2>
-{% for statement in statements %}
-    
-        Date : {{ statement.transaction_date }}
+<h3>Nickname : {{account.cust_name}}</h3>
+<h3>Balance : {{account.balance}}</h3>
+
+<a href="{{ url_for('sortStatements', id=account.id) }}">Sort by Transaction Date</a>
         <br>
-        Transaction : {{ statement.transaction }}
+<a href="{{ url_for('sortStatementsDesc', id=account.id) }}">Sort by Last Transaction First</a>
         <br>
-        Amount : {{ statement.transaction_amount }}
+<a href="{{ url_for('sortStatementsAmount', id=account.id) }}">Sort by Transaction Amount</a>
+        <br>
         <br>
 
-    {% if statement.transaction_completed == False %}
-           Is complete : {{ statement.transaction_completed }}
+
+<br>
+        {% for statement in statements %}
+            
+
+                Date : {{ statement.transaction_date }}
+                <br>
+                
+                Transaction : {{ statement.transaction }}
+                <br>
+                Amount : {{ statement.transaction_amount }}
+                <br>
+
+            {% if statement.transaction_completed == False %}
+                Is complete : {{ statement.transaction_completed }}
+                    <br>
+                    <form action="{{ url_for('complete', id=account.id, st_id=statement.id) }}">
+                        <input type=submit value="Complete">
+                    </form>
+                    <a href="{{ url_for('deposit', account_id=account.id) }}">Add A new Deposit </a>
+                    <br>
+                    <a href="{{ url_for('withdraw', account_id=account.id) }}">Add a new Withdrawal </a>
+                    <br>
+            {% endif %}
+
+            {% if statement.transaction_completed == True %}
+                Is complete : {{ statement.transaction_completed }}
+                    <br>
+                    <form action="{{ url_for('incomplete', id=account.id, st_id=statement.id) }}">
+                        <input type=submit value="Incomplete">
+                    </form>
+                    <a href="{{ url_for('deposit', account_id=account.id) }}">Add A new Deposit </a>
+                    <br>
+                    <a href="{{ url_for('withdraw', account_id=account.id) }}">Add a new Withdrawal </a>
+                    <br>
+            {% endif %}
             <br>
-            <form action="{{ url_for('complete', id=account.id, st_id=statement.id) }}">
-                <input type=submit value="Complete">
+            <form action="{{ url_for('deleteTransaction', account_id=account.id, id=statement.id) }}">
+                <input type=submit value="Delete Statement Entry">
             </form>
-            <a href="{{ url_for('add', id = account.id) }}">Add A new Transaction </a>
-            <br><br><br>
-    {% endif %}
+            
+        {% endfor %}
 
-    {% if statement.transaction_completed == True %}
-           Is complete : {{ statement.transaction_completed }}
-            <br>
-            <form action="{{ url_for('incomplete', id=account.id, st_id=statement.id) }}">
-                <input type=submit value="Incomplete">
-            </form>
-            <a href="{{ url_for('add', id = account.id) }}">Add A new Transaction </a>
-            <br><br><br>
-    {% endif %}
-    
-{% endfor %}
-
+    <a href="{{ url_for('customer_home') }}">Back to Customer Home Page</a>
 
 {% endblock body %}

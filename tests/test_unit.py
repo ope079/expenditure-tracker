@@ -92,18 +92,64 @@ class TestRead(TestBase):
         response = self.client.get(
             url_for('home'))
         self.assertIn(b"Barclays", response.data)
-        self.assertIn(b"000", response.data)
- 
+        self.assertIn(b"2000", response.data)
+
+class TestReadCustomerHome(TestBase):
+    def test_read_customer_home(self):
+        response = self.client.get(
+            url_for('customer_home'))
+        self.assertIn(b"Rexx", response.data)
+        self.assertIn(b"Barclays", response.data)
+        self.assertIn(b"2000", response.data)
+
 class TestAdd(TestBase):
     def test_add_account(self):
         response = self.client.post(
             url_for('addAccount'),
-            data = dict(balance=2520, account="Natwest", customer="Renato" ),
+            data = dict(balance=2520, account="Natwest", customer="Renato", transaction_amount=2520),
             follow_redirects=True
         )
         self.assertIn(b'Natwest',response.data)
         self.assertIn(b'Renato',response.data)
         self.assertIn(b'2520',response.data)
+
+class TestReadComplete(TestBase):
+    def test_read_complete(self):
+        response = self.client.post(
+            url_for('complete', id=1, st_id=1),
+            follow_redirects=True
+        )
+        self.assertIn(b"Barclays", response.data)
+        self.assertIn(b"2000", response.data)
+        self.assertIn(b"incomplete", response.data)
+
+class TestReadIncomplete(TestBase):
+    def test_read_incomplete(self):
+        response = self.client.post(
+            url_for('incomplete', id=1, st_id=1),
+            follow_redirects=True
+        )
+        self.assertIn(b"Barclays", response.data)
+        self.assertIn(b"2000", response.data)
+        self.assertIn(b"complete", response.data)
+
+class TestReadDeposit(TestBase):
+    def test_deposit(self):
+        response = self.client.post(
+            url_for('deposit', account_id=1),
+            data = dict(transaction="Got Credit",transaction_amount=100),
+            follow_redirects=True
+        )
+        self.assertIn(b"100", response.data)
+
+class TestReadWithdraw(TestBase):
+    def test_withdraw(self):
+        response = self.client.post(
+            url_for('withdraw', account_id=1),
+            data = dict(transaction="Buy tomatoes",transaction_amount=200),
+            follow_redirects=True
+        )
+        self.assertIn(b"200", response.data)
 
 class TestUpdate(TestBase):
     def test_update_account(self):
@@ -115,6 +161,25 @@ class TestUpdate(TestBase):
         self.assertIn(b'Wema',response.data)
         self.assertIn(b'Rexx',response.data)
 
+
+
+class TestStatements(TestBase):
+    def test_statements(self):
+        response = self.client.get(
+            url_for('statements', id=1),
+            )
+        self.assertIn(b'Barclays',response.data)
+        self.assertIn(b'Rexx',response.data)
+        self.assertIn(b'2000',response.data)
+
+class TestDeleteTransaction(TestBase):
+    def test_delete_transaction(self):
+        response = self.client.get(
+            url_for('deleteTransaction', id=1, account_id=1),
+            follow_redirects=True
+            )
+        self.assertNotIn(b'100',response.data)
+
 class TestDelete(TestBase):
     def test_delete_account(self):
         response = self.client.get(
@@ -123,4 +188,3 @@ class TestDelete(TestBase):
             )
         self.assertNotIn(b'Barclays',response.data)
         self.assertNotIn(b'Rexx',response.data)
-        self.assertNotIn(b'2000',response.data)

@@ -112,20 +112,26 @@ def statements(id):
     statements = account.transactions.all()
     return render_template("statements.html", title="Statements", statements=statements, account=account)
 
-@app.route('/statements/<int:id>', methods=['GET'])
+@app.route('/sortStatements/<int:id>', methods=['GET'])
 def sortStatements(id):
     account = Accounts.query.filter_by(id=id).first()
-    statements = account.transactions.all().order_by(statements.transaction_date)
-    return redirect(url_for("statements.html", title="Statements", statements=statements, account=account))
+    statements = account.transactions.order_by(Transaction.transaction_date).all()
+    return render_template("statements.html", id=id, title="Statements", statements=statements, account=account)
 
-@app.route('/statements/<int:id>', methods=['GET'])
+@app.route('/sortStatementsDes/<int:id>', methods=['GET'])
 def sortStatementsDesc(id):
     account = Accounts.query.filter_by(id=id).first()
-    statements = account.transactions.order_by(statements.transaction_date.desc())
-    return redirect(url_for("statements.html", title="Statements", statements=statements, account=account))
+    statements = account.transactions.order_by(Transaction.transaction_date.desc()).all()
+    return render_template("statements.html", id=id, title="Statements", statements=statements, account=account)
 
-@app.route('/statements/<int:id>', methods=['GET'])
+@app.route('/sortStatementsAmount/<int:id>', methods=['GET'])
 def sortStatementsAmount(id):
     account = Accounts.query.filter_by(id=id).first()
-    statements = account.transactions.order_by(statements.transaction_amount)
-    return redirect(url_for("statements.html", title="Statements", statements=statements, account=account))
+    statements = account.transactions.order_by(Transaction.transaction_amount).all()
+    return render_template("statements.html", id=id, title="Statements", statements=statements, account=account)
+
+@app.route('/sortStatementsAmountDesc/<int:id>', methods=['GET'])
+def sortStatementsAmountDesc(id):
+    account = Accounts.query.filter_by(id=id).first()
+    statements = account.transactions.order_by(Transaction.transaction_amount.desc()).all()
+    return render_template("statements.html", id=id, title="Statements", statements=statements, account=account)

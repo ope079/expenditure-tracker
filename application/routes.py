@@ -101,7 +101,9 @@ def deleteTransaction(id, account_id):
 
 @app.route('/delete/<int:id>')
 def delete(id):
+    transactions = Accounts.query.filter_by(id=id).first().transactions
     account = Accounts.query.filter_by(id=id).first()
+    transactions.delete()
     db.session.delete(account)
     db.session.commit()
     return redirect(url_for("customer_home"))

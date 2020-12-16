@@ -14,8 +14,7 @@ pip3 install -r requirements.txt
 pytest --cov ./application
 
 # Deploy Phase
-python3 create.py
-python3 app.py
+
 
 # Make the installation directory
 sudo mkdir /opt/expenditure-tracker

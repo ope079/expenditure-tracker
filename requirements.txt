@@ -12,3 +12,4 @@ flask-wtf
 pytest
 pytest-cov
 flask-testing
+selenium

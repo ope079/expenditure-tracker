@@ -7,10 +7,12 @@ sudo apt-get install python3-venv
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
+python3 create.py
+python3 app.py
 
 
 # pytest goes here
-pytest --cov ./application
+#pytest --cov ./application
 
 # Deploy Phase
 

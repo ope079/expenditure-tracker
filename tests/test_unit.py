@@ -172,6 +172,42 @@ class TestStatements(TestBase):
         self.assertIn(b'Rexx',response.data)
         self.assertIn(b'2000',response.data)
 
+class TestSortStatements(TestBase):
+    def test_sort_statements(self):
+        response = self.client.get(
+            url_for('sortStatements', id=1),
+            )
+        self.assertIn(b'Barclays',response.data)
+        self.assertIn(b'Rexx',response.data)
+        self.assertIn(b'2000',response.data)
+
+class TestSortStatementsDesc(TestBase):
+    def test_sort_statements_desc(self):
+        response = self.client.get(
+            url_for('sortStatementsDesc', id=1),
+            )
+        self.assertIn(b'Barclays',response.data)
+        self.assertIn(b'Rexx',response.data)
+        self.assertIn(b'2000',response.data)
+
+class TestSortStatementsAmount(TestBase):
+    def test_sort_statements_amount(self):
+        response = self.client.get(
+            url_for('sortStatementsAmount', id=1),
+            )
+        self.assertIn(b'Barclays',response.data)
+        self.assertIn(b'Rexx',response.data)
+        self.assertIn(b'2000',response.data)
+
+class TestSortStatementsAmountDesc(TestBase):
+    def test_sort_statements_amount_desc(self):
+        response = self.client.get(
+            url_for('sortStatementsAmountDesc', id=1),
+            )
+        self.assertIn(b'Barclays',response.data)
+        self.assertIn(b'Rexx',response.data)
+        self.assertIn(b'2000',response.data)
+
 class TestDeleteTransaction(TestBase):
     def test_delete_transaction(self):
         response = self.client.get(

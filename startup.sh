@@ -32,4 +32,7 @@ sudo systemctl start expenditure-tracker.service
 
 sleep 5
 
+app.config['SQLALCHEMY_DATABASE_URI'] = str(getenv('DATABASE_URI'))
+app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+
 python3 -m pytest tests/test_int.py --cov=application --cov-report term-missing --disable-warnings

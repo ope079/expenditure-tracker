@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt-get install python3-venv
+sudo apt install chromium-driver -y
 
 
 

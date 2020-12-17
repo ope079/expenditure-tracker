@@ -16,10 +16,12 @@ class TestBase(TestCase):
     def setUp(self):
         db.create_all()
         test_account = Accounts(account_name="Barclays",cust_name="Rexx", balance=2000 )
-        test_transaction = Transaction(transaction="Buy grapes", transaction_amount="20", accounts=test_account )
+        test_transaction = Transaction(transaction="Initial Balance", transaction_amount="2000", accounts=test_account )
         db.session.add(test_account)
         db.session.add(test_transaction)
         db.session.commit()
+        app.config['TESTING'] = True
+        app.config['WTF_CSRF_ENABLED'] = False
 
     def tearDown(self):
         db.session.remove()
@@ -106,12 +108,13 @@ class TestAdd(TestBase):
     def test_add_account(self):
         response = self.client.post(
             url_for('addAccount'),
-            data = dict(balance=2520, account="Natwest", customer="Renato", transaction_amount=2520),
+            data = dict(balance=2520, account="Natwest", customer="Renato"),
             follow_redirects=True
         )
         self.assertIn(b'Natwest',response.data)
         self.assertIn(b'Renato',response.data)
         self.assertIn(b'2520',response.data)
+
 
 class TestReadComplete(TestBase):
     def test_read_complete(self):
@@ -135,12 +138,13 @@ class TestReadIncomplete(TestBase):
 
 class TestReadDeposit(TestBase):
     def test_deposit(self):
+
         response = self.client.post(
             url_for('deposit', account_id=1),
             data = dict(transaction="Got Credit",transaction_amount=100),
             follow_redirects=True
         )
-        self.assertIn(b"100", response.data)
+        self.assertIn(b"2100", response.data)
 
 class TestReadWithdraw(TestBase):
     def test_withdraw(self):
@@ -149,7 +153,7 @@ class TestReadWithdraw(TestBase):
             data = dict(transaction="Buy tomatoes",transaction_amount=200),
             follow_redirects=True
         )
-        self.assertIn(b"200", response.data)
+        self.assertIn(b"1800", response.data)
 
 class TestUpdate(TestBase):
     def test_update_account(self):
@@ -166,7 +170,7 @@ class TestUpdate(TestBase):
 class TestStatements(TestBase):
     def test_statements(self):
         response = self.client.get(
-            url_for('statements', id=1),
+            url_for('statements', id=1)
             )
         self.assertIn(b'Barclays',response.data)
         self.assertIn(b'Rexx',response.data)
@@ -175,7 +179,7 @@ class TestStatements(TestBase):
 class TestSortStatements(TestBase):
     def test_sort_statements(self):
         response = self.client.get(
-            url_for('sortStatements', id=1),
+            url_for('sortStatements', id=1)
             )
         self.assertIn(b'Barclays',response.data)
         self.assertIn(b'Rexx',response.data)
@@ -184,7 +188,7 @@ class TestSortStatements(TestBase):
 class TestSortStatementsDesc(TestBase):
     def test_sort_statements_desc(self):
         response = self.client.get(
-            url_for('sortStatementsDesc', id=1),
+            url_for('sortStatementsDesc', id=1)
             )
         self.assertIn(b'Barclays',response.data)
         self.assertIn(b'Rexx',response.data)
@@ -193,7 +197,7 @@ class TestSortStatementsDesc(TestBase):
 class TestSortStatementsAmount(TestBase):
     def test_sort_statements_amount(self):
         response = self.client.get(
-            url_for('sortStatementsAmount', id=1),
+            url_for('sortStatementsAmount', id=1)
             )
         self.assertIn(b'Barclays',response.data)
         self.assertIn(b'Rexx',response.data)
@@ -202,7 +206,7 @@ class TestSortStatementsAmount(TestBase):
 class TestSortStatementsAmountDesc(TestBase):
     def test_sort_statements_amount_desc(self):
         response = self.client.get(
-            url_for('sortStatementsAmountDesc', id=1),
+            url_for('sortStatementsAmountDesc', id=1)
             )
         self.assertIn(b'Barclays',response.data)
         self.assertIn(b'Rexx',response.data)
@@ -210,11 +214,37 @@ class TestSortStatementsAmountDesc(TestBase):
 
 class TestDeleteTransaction(TestBase):
     def test_delete_transaction(self):
+
+        response = self.client.post(
+            url_for('deposit', account_id=1),
+            data = dict(transaction="Got Credit",transaction_amount=100),
+            follow_redirects=True
+        )
+
+
         response = self.client.get(
-            url_for('deleteTransaction', id=1, account_id=1),
+            url_for('deleteTransaction', id=2, account_id=1),
             follow_redirects=True
             )
         self.assertNotIn(b'100',response.data)
+        self.assertNotIn(b'Got Credit',response.data)
+
+class TestDeleteTransaction2(TestBase):
+    def test_delete_transaction2(self):
+
+        response = self.client.post(
+            url_for('withdraw', account_id=1),
+            data = dict(transaction="Buy Apples",transaction_amount=100),
+            follow_redirects=True
+        )
+
+
+        response = self.client.get(
+            url_for('deleteTransaction', id=2, account_id=1),
+            follow_redirects=True
+            )
+        self.assertNotIn(b'100',response.data)
+        self.assertNotIn(b'Buy Apples',response.data)
 
 class TestDelete(TestBase):
     def test_delete_account(self):

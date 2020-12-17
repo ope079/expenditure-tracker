@@ -23,9 +23,9 @@ class TestBase(LiveServerTestCase):
     def setUp(self):
         print("--------------------------NEXT-TEST----------------------------------------------")
         chrome_options = Options()
-        chrome_options.binary_location = "/home/jenkins/chromedriver"
+        chrome_options.binary_location = "/usr/bin/chromium-browser"
         chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(executable_path="/home/o_ore/chromedriver", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="/home/jenkins/chromedriver", chrome_options=chrome_options)
         self.driver.get("http://localhost:5000")
         
         db.session.commit()

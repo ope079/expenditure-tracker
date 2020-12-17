@@ -28,7 +28,6 @@ sudo systemctl daemon-reload
 sudo systemctl stop expenditure-tracker.service
 sudo systemctl start expenditure-tracker.service
 
-sleep 5
 
-
-python3 -m pytest tests/test_int.py --cov=application --cov-report term-missing --disable-warnings
+# pytest - integration tests goes here
+pytest tests/test_int.py --cov=application --cov-report term-missing --disable-warnings

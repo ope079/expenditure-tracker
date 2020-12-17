@@ -175,7 +175,7 @@ class TestDeleteTransaction(TestBase):
         time.sleep(1)
 
 
-        # Assert that browser redirects to customer home page
+        # Assert that browser redirects to statements page
         assert url_for('statements', id=1) in self.driver.current_url    
 
 class TestViewStatement(TestBase):
@@ -191,7 +191,7 @@ class TestViewStatement(TestBase):
         time.sleep(1)
 
 
-        # Assert that browser redirects to customer home page
+        # Assert that browser redirects to statements page
         assert url_for('statements', id=1) in self.driver.current_url
 
 class TestComplete(TestBase):
@@ -208,16 +208,16 @@ class TestComplete(TestBase):
         time.sleep(1)
 
 
-        # Assert that browser redirects to customer home page
+        # Assert that browser redirects to statements page
         assert url_for('statements', id=1, st_id=1) in self.driver.current_url      
         transaction = Accounts.query.filter_by(id=1).first().transactions.filter_by(id=1).first()
         assert transaction.transaction_completed == True
 
-class TestComplete(TestBase):
+class TestIncomplete(TestBase):
 
-    def test_complete(self):
+    def test_incomplete(self):
         """
-        Test that a user can mark a transaction complete
+        Test that a user can mark a transaction incomplete
         """
 
         # Navigate to Update Delete Page
@@ -228,7 +228,7 @@ class TestComplete(TestBase):
         time.sleep(1)
 
 
-        # Assert that browser redirects to customer home page
+        # Assert that browser redirects to statements page
         assert url_for('statements', id=1, st_id=1) in self.driver.current_url      
         transaction = Accounts.query.filter_by(id=1).first().transactions.filter_by(id=1).first()
         assert transaction.transaction_completed == False

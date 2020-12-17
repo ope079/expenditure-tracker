@@ -29,5 +29,8 @@ sudo systemctl stop expenditure-tracker.service
 sudo systemctl start expenditure-tracker.service
 
 
+Environment=['SQLALCHEMY_DATABASE_URI'] = str(getenv('DATABASE_URI')
+Environment=['SECRET_KEY'] = getenv('SECRET_KEY')
+
 # pytest - integration tests goes here
 pytest tests/test_int.py --cov=application --cov-report term-missing --disable-warnings

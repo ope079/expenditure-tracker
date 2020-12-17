@@ -28,6 +28,7 @@ sudo systemctl daemon-reload
 sudo systemctl stop expenditure-tracker.service
 sudo systemctl start expenditure-tracker.service
 
+sleep 5
 
 Environment=DATABASE_URI="sqlite:///data.db"
 Environment=SECRET_KEY="adnsmnfngnfjfkfkdkdutje"

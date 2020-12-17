@@ -1,9 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt-get install python3-venv
-sudo apt-get install -y chromium-browser 
-sudo wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
-sudo unzip chromedriver_linux64.zip
+
 
 
 # Test Phase

@@ -16,7 +16,7 @@ pytest tests/test_unit.py --cov=application --cov-report term-missing --disable-
 
 # Deploy Phase
 python3 create.py
-python3 apt.py
+python3 app.py
 
 # Make the installation directory
 sudo mkdir /opt/expenditure-tracker

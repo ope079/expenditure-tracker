@@ -15,7 +15,8 @@ pip3 install -r requirements.txt
 pytest tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
 
 # Deploy Phase
-
+python3 create.py
+python3 apt.py
 
 # Make the installation directory
 sudo mkdir /opt/expenditure-tracker

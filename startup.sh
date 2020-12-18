@@ -1,9 +1,10 @@
 #!/bin/bash
 sudo apt update
+
 sudo apt-get install python3-venv
 
 
-
+sudo rm -r venv
 
 # Test Phase
 python3 -m venv venv

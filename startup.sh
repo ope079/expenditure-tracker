@@ -1,9 +1,10 @@
 #!/bin/bash
 sudo apt update
+
 sudo apt-get install python3-venv
 
 
-
+sudo rm -r venv
 
 # Test Phase
 python3 -m venv venv
@@ -15,7 +16,8 @@ pip3 install -r requirements.txt
 pytest tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
 
 # Deploy Phase
-
+python3 create.py
+python3 app.py
 
 # Make the installation directory
 sudo mkdir /opt/expenditure-tracker

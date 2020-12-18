@@ -28,7 +28,7 @@ class TestBase(LiveServerTestCase):
         #chrome_options.add_argument('--no-sandbox')
         #chrome_options.add_argument('--disable-dev-shm-usage')
         self.driver = webdriver.Chrome(
-            executable_path="/home/o_ore/chromedriver", 
+            executable_path="/home/o_orekoya/chromedriver", 
             chrome_options=chrome_options
             )
         self.driver.get("http://localhost:5000")

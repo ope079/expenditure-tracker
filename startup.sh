@@ -4,6 +4,7 @@ sudo apt-get install python3-venv
 
 
 
+
 # Test Phase
 python3 -m venv venv
 source venv/bin/activate
@@ -29,5 +30,3 @@ sudo systemctl stop expenditure-tracker.service
 sudo systemctl start expenditure-tracker.service
 
 
-# pytest - integration tests goes here
-pytest tests/test_int.py --cov=application --cov-report term-missing --disable-warnings

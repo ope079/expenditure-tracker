@@ -23,12 +23,12 @@ class TestBase(LiveServerTestCase):
     def setUp(self):
         print("--------------------------NEXT-TEST----------------------------------------------")
         chrome_options = Options()
-        #chrome_options.binary_location = "/usr/bin/chromium-browser"
+        chrome_options.binary_location = "/usr/bin/chromium-browser"
         chrome_options.add_argument("--headless")
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
+        #chrome_options.add_argument('--no-sandbox')
+        #chrome_options.add_argument('--disable-dev-shm-usage')
         self.driver = webdriver.Chrome(
-            #executable_path="/home/o_orekoya/chromedriver", 
+            executable_path="/home/o_ore/chromedriver", 
             chrome_options=chrome_options
             )
         self.driver.get("http://localhost:5000")
@@ -43,6 +43,7 @@ class TestBase(LiveServerTestCase):
         db.session.add(test_account)
         db.session.add(test_transaction)
         db.session.commit()
+
         
 
     def tearDown(self):
@@ -54,6 +55,37 @@ class TestBase(LiveServerTestCase):
     def test_server_is_up_and_running(self):
         response = urlopen("http://localhost:5000")
         self.assertEqual(response.code, 200)
+
+
+class TestHome(TestBase):
+
+    def test_Home(self):
+        """
+        Test that a user can access the home page
+        """
+
+        # Navigate to Update Delete Page
+        self.driver.find_element_by_xpath("/html/body/a[1]").click()
+        time.sleep(1)
+
+
+        # Assert that browser redirects to statements page
+        assert url_for('home') in self.driver.current_url      
+
+class TestCustomerHome(TestBase):
+
+    def test_customer_Home(self):
+        """
+        Test that a user can access the home page
+        """
+
+        # Navigate to Update Delete Page
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        time.sleep(1)
+
+
+        # Assert that browser redirects to statements page
+        assert url_for('customer_home') in self.driver.current_url  
 
 class TestAccountCreation(TestBase):
 
@@ -190,7 +222,7 @@ class TestViewStatement(TestBase):
         Test that a user can view statements
         """
 
-        # Navigate to Update Delete Page
+        # Navigate to statement Page
         self.driver.find_element_by_xpath("/html/body/a[3]").click()
         self.driver.find_element_by_xpath("/html/body/a[3]").click()
         time.sleep(1)
@@ -198,6 +230,70 @@ class TestViewStatement(TestBase):
 
         # Assert that browser redirects to statements page
         assert url_for('statements', id=1) in self.driver.current_url
+
+
+class TestSortStatement(TestBase):
+
+    def test_view_statement(self):
+        """
+        Test that a user can view sorted statements
+        """
+
+        # Navigate to statements Page
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        time.sleep(1)
+
+
+        # Assert that browser redirects to statements page
+        assert url_for('sortStatements', id=1) in self.driver.current_url
+
+class TestSortStatementDesc(TestBase):
+
+    def test_view_statement_desc(self):
+        """
+        Test that a user can view sorted statements descending
+        """
+
+        # Navigate to statements Page
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[4]").click()
+        time.sleep(1)
+
+
+        # Assert that browser redirects to statements page
+        assert url_for('sortStatementsDesc', id=1) in self.driver.current_url
+
+class TestSortStatementAmount(TestBase):
+
+    def test_view_statement_amount(self):
+        """
+        Test that a user can view sorted statements by Amount
+        """
+
+        # Navigate to statements Page
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[5]").click()
+        time.sleep(1)
+
+class TestSortStatementAmountDesc(TestBase):
+
+    def test_view_statement_amount_desc(self):
+        """
+        Test that a user can view sorted statements by Amount Descending
+        """
+
+        # Navigate to statements Page
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[3]").click()
+        self.driver.find_element_by_xpath("/html/body/a[6]").click()
+        time.sleep(1)
+
+        # Assert that browser redirects to statements page
+        assert url_for('sortStatementsAmountDesc', id=1) in self.driver.current_url
 
 class TestComplete(TestBase):
 

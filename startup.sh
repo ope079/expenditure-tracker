@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt-get install python3-venv
-sudo apt install chromium-driver -y
+
 
 
 
@@ -29,10 +29,4 @@ sudo systemctl daemon-reload
 sudo systemctl stop expenditure-tracker.service
 sudo systemctl start expenditure-tracker.service
 
-sleep 5
 
-Environment=DATABASE_URI="sqlite:///data.db"
-Environment=SECRET_KEY="adnsmnfngnfjfkfkdkdutje"
-
-# pytest - integration tests goes here
-pytest tests/test_int.py --cov=application --cov-report term-missing --disable-warnings

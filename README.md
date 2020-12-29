@@ -182,6 +182,11 @@ The integration tests are **not** perfromed on jenkins.
 
 The app is at a very rudimentary stage, and this is reflected by the simplicity of the front end which is built with very simple HTML. However after the tests carried out, it has proved to be largely stable without any known breaks.
 
+The user is directed to the home page when they navigate to the URL:
+
+![homepage][homepage]
+
+They are then able to add new Bank accounts to monitor:
 
 
 
@@ -194,15 +199,15 @@ The app is at a very rudimentary stage, and this is reflected by the simplicity 
 Ope Orekoya
 
 
-[erd1]: https://imgur.com/8TmFnZe
-[erd2]: https://imgur.com/DWQducW
-[erd3]: https://imgur.com/yURDZWs
-[riskassessment1]: https://imgur.com/Gvia8xH
+[erd1]: https://imgur.com/8TmFnZe.png
+[erd2]: https://imgur.com/DWQducW.png
+[erd3]: https://imgur.com/yURDZWs.png
+[riskassessment1]: https://imgur.com/Gvia8xH.png
 [riskassessment2]: https://i.imgur.com/YAkT1A3.png
-[trello1]: https://imgur.com/WKqiB1P
-[trello2]: https://imgur.com/U2wHTYn
+[trello1]: https://imgur.com/WKqiB1P.png
+[trello2]: https://imgur.com/U2wHTYn.png
 [trello3]: https://i.imgur.com/7u4IbLP.png?1
-[trello4]: https://imgur.com/QTgS3pi
+[trello4]: https://imgur.com/QTgS3pi.png
 [ci]: 
 [coverage]:
 [coverage2]:

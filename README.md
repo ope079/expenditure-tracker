@@ -160,6 +160,8 @@ The out put can be seen below:
 
 ![coverage][coverage]
 
+The unit tests cover all the functions in the application. It is in effect testting all the CRUD functionality of the application with a 100% coverage.
+
 ### **Unit Tests**
 The unit test results can be seen below on the pytestconsole
 
@@ -172,7 +174,9 @@ Below is the coverage
 
 ![coverage2][coverage2]
 
-And the consoile output of the integration tests are below:
+The coverage of the integration test as can be seen above is 44%. However the functionality and connectivity of the CRUD applications in the HTML front end and their adequate connectiivity and functionality with the backend database layer have been tested to be working.
+
+And the console output of the integration tests are below:
 
 ![integrationtests][integrationtests]
 

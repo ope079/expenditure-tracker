@@ -24,8 +24,6 @@
 
 * App Design
 
-* Known Issues
-
 * Future Improvements
 
 * Author
@@ -222,7 +220,6 @@ You can also delete the statement entry on the statements page.
 
 
 
-## **Known Issues**
 
 ## **Future improvements**
 There are a few improvements that could be included to future iterations of this project in a future sprint. These include:
@@ -233,7 +230,7 @@ There are a few improvements that could be included to future iterations of this
 
 
 
-## **Author
+## **Author**
 Ope Orekoya
 
 

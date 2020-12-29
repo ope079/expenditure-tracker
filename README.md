@@ -229,7 +229,7 @@ There are a few improvements that could be included to future iterations of this
 
 
 
-## **Author
+## **Author**
 Ope Orekoya
 
 

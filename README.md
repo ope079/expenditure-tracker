@@ -188,12 +188,46 @@ The user is directed to the home page when they navigate to the URL:
 
 They are then able to add new Bank accounts to monitor:
 
+![addnewaccount][addnewaccount]
+
+From here the customer is taken to the Customer Home page where they can view transactions on their various accounts which they have added
+
+![customerhome][customerHome]
+
+If the customer clicks the add deposit or add withdrawal, it takes them to a new page where they can add new deposits or new withdrawals to their balance. In the screenshot below,a deposit of 5000 is being added.
+
+![adddeposit][adddeposit]
+
+After adding the deposit, it takes them back to the customer home page.
+
+![cutomerhomedepositadded][cutomerhomedepositadded]
+
+And if they click on the view statement page, it takes them to the Statements page.
+
+![statements][statements]
+
+And if they want, they can sort the statement results by Date most recent or last first, or amount highest or lowest first.
+
+1[statements2][statemets2]
+
+They can also update account information from the customer home page:
+
+![update][update]
+
+You can also delete the statement entry on the statements page.
 
 
 
 ## **Known Issues**
 
 ## **Future improvements**
+There are a few improvements that could be included to future iterations of this project in a future sprint. These include:
+* Implementation of a customer login function and a customer table in the database
+* Connect the transaction_completed functionality to the balance so that if a transaction is completed, it would be subtracted or added to the balance, and if it is then marked incomplete, the transaction will be reversed in the balance.
+* Connect to external apis so that a customer can connect to their actual bank account
+* Improve security and provide encryption to avoid data theft or leakage
+
+
 
 ## **Author
 Ope Orekoya
@@ -208,9 +242,16 @@ Ope Orekoya
 [trello2]: https://imgur.com/U2wHTYn.png
 [trello3]: https://i.imgur.com/7u4IbLP.png?1
 [trello4]: https://imgur.com/QTgS3pi.png
-[ci]: 
-[coverage]:
-[coverage2]:
-[unittests]:
-[integrationtests]:
-
+[ci]: https://i.imgur.com/oCjLlFc.jpg
+[coverage]: https://i.imgur.com/ZmxhFaA.png?1
+[coverage2]: https://i.imgur.com/dPiVdiV.png?1
+[unittests]: https://i.imgur.com/Wo92Lk5.png?1
+[integrationtests]: https://i.imgur.com/ZdY8PC1.png?1
+[homepage]: https://i.imgur.com/E6pfaOX.png
+[addnewaccount]: https://i.imgur.com/uYkcXEi.png
+[customerHome]: https://i.imgur.com/5TyAfOh.png
+[adddeposit]: https://i.imgur.com/9xTk9N8.png
+[cutomerhomedepositadded]: https://i.imgur.com/YxkhufM.png?1
+[statements]: https://i.imgur.com/iLx4K53.png
+[statemets2]: https://i.imgur.com/sEr5weP.png
+[update]: https://i.imgur.com/bVGr9NF.png?1

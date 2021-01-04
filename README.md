@@ -153,17 +153,22 @@ Below is a screenshot of the final risk assesment for the project:
 
 ## **Tests**
 
-pytest was uses to run the unit and integration tests on the app. The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code.
+pytest was uses to run the unit and integration tests on the app. 
+
+### **Unit Tests**
+The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code.
 The out put can be seen below:
 
 ![coverage][coverage]
 
-The unit tests cover all the functions in the application. It is in effect testting all the CRUD functionality of the application with a 100% coverage.
+The unit tests cover all the functions in the application. It is in effect testing all the CRUD functionality of the application and it had a 100% coverage. The models, forms and routes in the app were covered and within scope. But the front end and the database layers do not fall within the scope of coverage because they are not functions within the app. They are covered by the integration tests.
 
-### **Unit Tests**
-The unit test results can be seen below on the pytestconsole
+The unit test results can be seen below on the screenshot of the pytestconsole
 
 ![unittests][unittests]
+
+To run the unit test with coverage and avoiding warnings, the following should be entered into the console:
+   tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
 
 ### **Integration Tests**
 The integration tests are carried out with the use of selenium web-driver on top of pytest. They test the connectivity and the working of the whole application as a whole. This includes whether the front end is working properly, and the connectivity to the backend. The coverage for this test is low and can be seen below. This is because the test only covers the front end functionality and itws working with the backend by checking that when a particular action is performed on a front end page, it leads to the iput being saved on the database and the next page results reflect what is in the database. Rather than testing individual functions, it is testing the app as a whole.
@@ -178,7 +183,8 @@ And the console output of the integration tests are below:
 
 ![integrationtests][integrationtests]
 
-The integration tests are **not** perfromed on jenkins.
+The integration tests are **not** perfromed on jenkins. in order to run the integration test with coverage and avoiding warnings, enter the following in the command line:
+   tests/test_int.py --cov=application --cov-report term-missing --disable-warnings
 
 ## **App Design**
 

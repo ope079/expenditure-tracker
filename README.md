@@ -138,7 +138,7 @@ What is indicated in the snapshot above is the final trello board that was used 
 
 ## **Risk Assessment**
 
-There were two risk assessments drawn up for the project. An initial sparsely populated one and a full risk assessment carried out after. It covers some of the major risks that could affect the project both during and after completion.
+There were two risk assessments drawn up for the project. An initial sparsely populated one and a full risk assessment carried out after. It covers some of the major risks that could affect the project both during and after completion. The risks are not all inclusive as there would still be many risks that have not yet been covered. A link to the full risk assessment is available at: https://docs.google.com/spreadsheets/d/1957LvQ6fw0zyt0tWMfNZcQU0DGxp7J4zqLzWXm0L71Q/edit?usp=sharing
 
 
 ### **Before**
@@ -153,17 +153,26 @@ Below is a screenshot of the final risk assesment for the project:
 
 ## **Tests**
 
-pytest was uses to run the unit and integration tests on the app. The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code.
+pytest was uses to run the unit and integration tests on the app. 
+
+### **Unit Tests**
+The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code.
 The out put can be seen below:
+
+![jenkinsUnit][jenkinsUnit]
+
+The unit tests cover all the functions in the application. It is in effect testing all the CRUD functionality of the application and it had a 100% coverage. The models, forms and routes in the app were covered and within scope. But the front end and the database layers do not fall within the scope of coverage because they are not functions within the app. They are covered by the integration tests.
+
+The unit test results can be seen below on the screenshot of the pytest after being run on the console:
+
+![unittests][unittests]
+
+And a screenshot of the coverage from reunning pytest on the console is below:
 
 ![coverage][coverage]
 
-The unit tests cover all the functions in the application. It is in effect testting all the CRUD functionality of the application with a 100% coverage.
-
-### **Unit Tests**
-The unit test results can be seen below on the pytestconsole
-
-![unittests][unittests]
+To run the unit test with coverage and avoiding warnings, the following should be entered into the console:
+   tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
 
 ### **Integration Tests**
 The integration tests are carried out with the use of selenium web-driver on top of pytest. They test the connectivity and the working of the whole application as a whole. This includes whether the front end is working properly, and the connectivity to the backend. The coverage for this test is low and can be seen below. This is because the test only covers the front end functionality and itws working with the backend by checking that when a particular action is performed on a front end page, it leads to the iput being saved on the database and the next page results reflect what is in the database. Rather than testing individual functions, it is testing the app as a whole.
@@ -178,7 +187,8 @@ And the console output of the integration tests are below:
 
 ![integrationtests][integrationtests]
 
-The integration tests are **not** perfromed on jenkins.
+The integration tests are **not** perfromed on jenkins. in order to run the integration test with coverage and avoiding warnings, enter the following in the command line:
+   tests/test_int.py --cov=application --cov-report term-missing --disable-warnings
 
 ## **App Design**
 
@@ -220,7 +230,6 @@ You can also delete the statement entry on the statements page.
 
 
 
-
 ## **Future improvements**
 There are a few improvements that could be included to future iterations of this project in a future sprint. These include:
 * Implementation of a customer login function and a customer table in the database
@@ -246,6 +255,7 @@ Ope Orekoya
 [ci]: https://i.imgur.com/oCjLlFc.jpg
 [coverage]: https://i.imgur.com/ZmxhFaA.png?1
 [coverage2]: https://i.imgur.com/dPiVdiV.png?1
+[jenkinsUnit]: https://i.imgur.com/ibmcjuX.png?1
 [unittests]: https://i.imgur.com/Wo92Lk5.png?1
 [integrationtests]: https://i.imgur.com/ZdY8PC1.png?1
 [homepage]: https://i.imgur.com/E6pfaOX.png

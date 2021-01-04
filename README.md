@@ -82,7 +82,9 @@ In the final ERD for the final iteration of the app, as can be seen above, the p
 
 ![CI][ci]
 
-Pictured above is the continous integration pipeline with the associated frameworks and services. The pipeline integrates the unit testing phase of the app, as can be seen in the diagram. So once I produce code on my local machine or local VM and push it to github, there is immediately a test carried out of the code which is pushed to jenkins via a webhook. The tests are carried out via jenkins automatically, and reports are produced.
+Pictured above is the continous integration pipeline with the associated frameworks and services. The pipeline integrates the unit testing phase of the app, as can be seen in the diagram. So once I produce code on my local machine or local VM and push it to github, there is immediately a test carried out of the code which is pushed to jenkins via a webhook. The tests are carried out via jenkins automatically, and reports are produced. The out put can be seen below:
+
+![jenkinsUnit][jenkinsUnit]
 
 The tests carried out on jenkins follow build stages on a pipeline job which ensures that you can pinpoint where the app fails to build and tests fail. Jenkins will provide you with information on where your build failed. The stages are:
 * Checkout from Git Repository
@@ -156,10 +158,7 @@ Below is a screenshot of the final risk assesment for the project:
 pytest was uses to run the unit and integration tests on the app. 
 
 ### **Unit Tests**
-The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code.
-The out put can be seen below:
-
-![jenkinsUnit][jenkinsUnit]
+The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code as seen in the diagram under the CI Pipeline section above.
 
 The unit tests cover all the functions in the application. It is in effect testing all the CRUD functionality of the application and it had a 100% coverage. The models, forms and routes in the app were covered and within scope. But the front end and the database layers do not fall within the scope of coverage because they are not functions within the app. They are covered by the integration tests.
 

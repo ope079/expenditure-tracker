@@ -138,7 +138,7 @@ What is indicated in the snapshot above is the final trello board that was used 
 
 ## **Risk Assessment**
 
-There were two risk assessments drawn up for the project. An initial sparsely populated one and a full risk assessment carried out after. It covers some of the major risks that could affect the project both during and after completion.
+There were two risk assessments drawn up for the project. An initial sparsely populated one and a full risk assessment carried out after. It covers some of the major risks that could affect the project both during and after completion. The risks are not all inclusive as there would still be many risks that have not yet been covered. A link to the full risk assessment is available at: https://docs.google.com/spreadsheets/d/1957LvQ6fw0zyt0tWMfNZcQU0DGxp7J4zqLzWXm0L71Q/edit?usp=sharing
 
 
 ### **Before**

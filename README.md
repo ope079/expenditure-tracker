@@ -159,13 +159,17 @@ pytest was uses to run the unit and integration tests on the app.
 The unit test was designed to assert that the output of a certain function is the expected output when it is run. Jenkins produces outputs that inform the developer of the tests performed and the degree to which it covers the code.
 The out put can be seen below:
 
-![coverage][coverage]
+[jenkinsUnit][jenkinsUnit]
 
 The unit tests cover all the functions in the application. It is in effect testing all the CRUD functionality of the application and it had a 100% coverage. The models, forms and routes in the app were covered and within scope. But the front end and the database layers do not fall within the scope of coverage because they are not functions within the app. They are covered by the integration tests.
 
-The unit test results can be seen below on the screenshot of the pytestconsole
+The unit test results can be seen below on the screenshot of the pytest after being run on the console:
 
 ![unittests][unittests]
+
+And a screenshot of the coverage from reunning pytest on the console is below:
+
+![coverage][coverage]
 
 To run the unit test with coverage and avoiding warnings, the following should be entered into the console:
    tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
@@ -251,6 +255,7 @@ Ope Orekoya
 [ci]: https://i.imgur.com/oCjLlFc.jpg
 [coverage]: https://i.imgur.com/ZmxhFaA.png?1
 [coverage2]: https://i.imgur.com/dPiVdiV.png?1
+[jenkinsUnit]: https://i.imgur.com/ibmcjuX.png?1
 [unittests]: https://i.imgur.com/Wo92Lk5.png?1
 [integrationtests]: https://i.imgur.com/ZdY8PC1.png?1
 [homepage]: https://i.imgur.com/E6pfaOX.png

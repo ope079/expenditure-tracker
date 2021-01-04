@@ -1,11 +1,19 @@
 #!/bin/bash
-cd /opt/expenditure-tracker
-sudo mkdir /flask_project
-sudo chown -R /flask_project
-sudo python3 -m venv venv
+
+sudo apt update
+sudo apt-get install python3-venv
+
+python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
-python3 create.py
-python3 app.py
 
+# pytest goes here
+tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
+
+sudo mkdir /opt/expenditure-tracker
+sudo chown -R jenkins /opt/expenditure-tracker
+
+sudo systemctl daemon-reload
+sudo systemctl stop expenditure-tracker.service
+sudo systemctl start expenditure-tracker.service
 

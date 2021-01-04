@@ -9,10 +9,12 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 
 # pytest goes here
-tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
+pytest tests/test_unit.py --cov=application --cov-report term-missing --disable-warnings
 
 sudo mkdir /opt/expenditure-tracker
 sudo chown -R jenkins /opt/expenditure-tracker
+
+
 
 sudo systemctl daemon-reload
 sudo systemctl stop expenditure-tracker.service
